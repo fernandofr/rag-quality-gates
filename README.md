@@ -7,7 +7,7 @@ Educational project demonstrating how to build a **Retrieval-Augmented Generatio
 This project proves that **LLM quality directly impacts RAG output quality**. Using the same pipeline, same document, same questions — only changing the model:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#4F46E5', 'primaryTextColor': '#fff', 'primaryBorderColor': '#4338CA', 'lineColor': '#6366F1', 'secondaryColor': '#10B981', 'tertiaryColor': '#F59E0B'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#0B0F19', 'primaryColor': '#1E293B', 'primaryTextColor': '#E5E7EB', 'primaryBorderColor': '#334155', 'lineColor': '#475569', 'secondaryColor': '#064E3B', 'secondaryTextColor': '#ECFDF5', 'secondaryBorderColor': '#065F46', 'tertiaryColor': '#78350F', 'tertiaryTextColor': '#FFFBEB', 'tertiaryBorderColor': '#92400E', 'axisTextColor': '#CBD5E1', 'titleColor': '#F1F5F9'}}}%%
 xychart-beta
     title "RAGAS Score Evolution: Small Model → Large Model"
     x-axis ["Faithfulness", "Answer Relevancy", "Average Score"]
@@ -35,6 +35,7 @@ xychart-beta
 ## Pipeline Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#0B0F19', 'primaryColor': '#1E293B', 'primaryTextColor': '#E5E7EB', 'primaryBorderColor': '#334155', 'lineColor': '#475569', 'secondaryColor': '#064E3B', 'tertiaryColor': '#78350F'}}}%%
 flowchart TB
     subgraph INPUT["📄 Input Layer"]
         A[("PDF Document<br/>Bitcoin Whitepaper")]
@@ -55,7 +56,7 @@ flowchart TB
         G["Query Processing"]
         H["Semantic Search<br/>k=4 documents"]
         I["Context Assembly"]
-        J["LLM Generation<br/>Claude via Claudex"]
+        J["LLM Generation<br/>Claudex"]
     end
 
     subgraph QUALITY["🎯 Quality Gates"]
@@ -75,18 +76,12 @@ flowchart TB
     J --> K
     K --> L & M
     L & M --> N --> O
-
-    style INPUT fill:#312e81,stroke:#6366f1,color:#e0e7ff
-    style INGESTION fill:#78350f,stroke:#f59e0b,color:#fef3c7
-    style EMBEDDING fill:#064e3b,stroke:#10b981,color:#d1fae5
-    style RAG fill:#1e3a8a,stroke:#3b82f6,color:#dbeafe
-    style QUALITY fill:#831843,stroke:#ec4899,color:#fce7f3
-    style OUTPUT fill:#4c1d95,stroke:#8b5cf6,color:#f3e8ff
 ```
 
 ## Quality Gate Decision Framework
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#0B0F19', 'primaryColor': '#1E293B', 'primaryTextColor': '#E5E7EB', 'primaryBorderColor': '#334155', 'lineColor': '#475569', 'secondaryColor': '#064E3B', 'tertiaryColor': '#78350F'}}}%%
 flowchart TD
     START(("RAG<br/>Response")) --> EVAL{"RAGAS<br/>Evaluation"}
 
@@ -105,11 +100,6 @@ flowchart TD
 
     GATE -->|"Both Pass"| DEPLOY["✅ Production<br/>Ready"]
     GATE -->|"Any Fail"| INVESTIGATE["🔍 Investigate<br/>& Improve"]
-
-    style START fill:#312e81,stroke:#6366f1,color:#e0e7ff
-    style DEPLOY fill:#064e3b,stroke:#10b981,color:#d1fae5
-    style RETRY fill:#78350f,stroke:#f59e0b,color:#fef3c7
-    style INVESTIGATE fill:#7f1d1d,stroke:#ef4444,color:#fee2e2
 ```
 
 ## Project Structure
@@ -171,6 +161,7 @@ uv run python main.py
 ## Technical Stack
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#0B0F19', 'primaryColor': '#1E293B', 'primaryTextColor': '#E5E7EB', 'primaryBorderColor': '#334155', 'lineColor': '#475569', 'secondaryColor': '#064E3B', 'tertiaryColor': '#78350F'}}}%%
 flowchart TB
     subgraph LOCAL["🏠 100% Local Infrastructure"]
         subgraph EMBED["Embeddings"]
@@ -198,17 +189,12 @@ flowchart TB
     NOMIC --> FAISS
     FAISS --> CLAUDEX
     CLAUDEX --> RAGAS
-
-    style LOCAL fill:#14532d,stroke:#16a34a,color:#dcfce7
-    style EMBED fill:#1e3a8a,stroke:#3b82f6,color:#dbeafe
-    style VECTOR fill:#78350f,stroke:#f59e0b,color:#fef3c7
-    style LLM fill:#312e81,stroke:#6366f1,color:#e0e7ff
-    style EVAL fill:#831843,stroke:#ec4899,color:#fce7f3
 ```
 
 ## RAGAS Metrics Explained
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#0B0F19', 'primaryColor': '#1E293B', 'primaryTextColor': '#E5E7EB', 'primaryBorderColor': '#334155', 'lineColor': '#475569'}}}%%
 mindmap
   root((RAGAS<br/>Metrics))
     Faithfulness
@@ -273,6 +259,7 @@ NaiveRAG(
 ## Model Comparison
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#0B0F19', 'primaryColor': '#1E293B', 'primaryTextColor': '#E5E7EB', 'primaryBorderColor': '#334155', 'lineColor': '#475569', 'secondaryColor': '#064E3B', 'tertiaryColor': '#78350F'}}}%%
 flowchart LR
     subgraph SMALL["🔹 Small Model<br/>qwen2.5:3b"]
         A1["Faithfulness<br/>0.483"]
@@ -296,10 +283,6 @@ flowchart LR
     B --> C1
     B --> C2
     B --> C3
-
-    style SMALL fill:#7f1d1d,stroke:#ef4444,color:#fee2e2
-    style IMPROVEMENT fill:#78350f,stroke:#f59e0b,color:#fef3c7
-    style LARGE fill:#064e3b,stroke:#10b981,color:#d1fae5
 ```
 
 ## Sample Output
